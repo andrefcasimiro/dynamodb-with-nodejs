@@ -25,5 +25,5 @@ const get = async () => {
 }
 
 get().then(item => {
-    console.log(`Item returned: ${JSON.stringify(item)}`)
+    console.log(items)
 })

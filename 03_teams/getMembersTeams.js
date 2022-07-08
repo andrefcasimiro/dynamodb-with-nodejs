@@ -10,13 +10,14 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient({
     }
 })
 
-const getUserTasks = async () => {
+const getMembersTeams = async () => {
     const params = {
         TableName: process.env.TABLE_NAME,
-        KeyConditionExpression: 'PK = :pk AND begins_with(SK, :sk)',
+        IndexName: 'GSI1-SK-index',
+        KeyConditionExpression: 'GSI1 = :gsi1 AND begins_with(SK, :sk)',
         ExpressionAttributeValues: {
-            ':pk': 'user_1234',
-            ':sk': 'task',
+            ':gsi1': 'user_1234',
+            ':sk': 'teamMember',
         }
     }
 
@@ -25,6 +26,6 @@ const getUserTasks = async () => {
     return result.Items
 }
 
-getUserTasks().then(items => {
+getMembersTeams().then(items => {
     console.log(items)
 })
