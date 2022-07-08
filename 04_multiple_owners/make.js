@@ -11,38 +11,39 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient({
 })
 
 const make = async () => {
-    const task1 = {
+    await dynamoDb.put({
         TableName: process.env.TABLE_NAME,
         Item: {
             PK: 'user_1234',
             SK: 'task_1234',
+            GSI1: 'team_1234',
             name: 'Task 1',
-            description: 'Plan Meeting',
+            description: 'Plan meeting',
         }
-    }
-    await dynamoDb.put(task1).promise()
+    }).promise()
 
-    const task2 = {
+    await dynamoDb.put({
         TableName: process.env.TABLE_NAME,
         Item: {
             PK: 'user_1234',
             SK: 'task_1235',
+            GSI1: 'team_1235',
             name: 'Task 2',
-            description: 'Have Meeting',
+            description: 'Have meeting',
         }
-    }
-    await dynamoDb.put(task2).promise()
+    }).promise()
 
-    const task3 = {
+    await dynamoDb.put({
         TableName: process.env.TABLE_NAME,
         Item: {
             PK: 'user_1235',
             SK: 'task_1236',
+            GSI1: 'team_1234',
             name: 'Task 1',
-            description: 'Attend Meeting',
+            description: 'Attend meeting',
         }
-    }
-    await dynamoDb.put(task3).promise()
+    }).promise()
+
 }
 
 make()
